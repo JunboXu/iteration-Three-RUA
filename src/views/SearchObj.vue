@@ -364,24 +364,24 @@ export default {
   },
   mounted() {
     var _this = this;
-    this.$axios.get('http://47.101.165.107:3180/rank/topKeywordByActivation').then(function (response){
+    this.$axios.get('http://47.93.36.92:3180/rank/topKeywordByActivation').then(function (response){
 
       // console.log(response.data.data);//这一步可执行
       _this.topKeywordsA=response.data.data;//这一步报错说undefined
       console.log("getKeywordByActivation成功！");
       console.log(_this.topKeywordsA);
     });
-    this.$axios.get('http://47.101.165.107:3180/rank/topAffiliationByActivation').then(function (response){
+    this.$axios.get('http://47.93.36.92:3180/rank/topAffiliationByActivation').then(function (response){
       _this.topaffiliationA=response.data.data;
       // console.log("gettopaffiliationA成功！");
       // console.log(_this.topaffiliationA);
     });
-    this.$axios.get('http://47.101.165.107:3180/rank/topAuthorByActivation').then(function (response){
+    this.$axios.get('http://47.93.36.92:3180/rank/topAuthorByActivation').then(function (response){
       _this.topAuthorsA=response.data.data;
       // console.log("topAuthorsA成功！");
       // console.log(_this.topAuthorsA);
     });
-    this.$axios.get('http://47.101.165.107:3180/rank/topReference').then(function (response){
+    this.$axios.get('http://47.93.36.92:3180/rank/topReference').then(function (response){
       _this.toprefs=response.data.data;
       // console.log("toprefs成功！");
       // console.log(_this.toprefs);
@@ -389,7 +389,7 @@ export default {
   },
   methods:{
     goToInterest:function(){
-      this.$router.push('/admin/interest');
+      this.$router.push('/interest');
     },
     seeRelationGraph:function(){
       //TODO
@@ -403,7 +403,7 @@ export default {
           type: 'success',
           message: '正在继续!'
         });
-        this.$router.push('/admin/echartsAuthor/'+999999999);
+        this.$router.push('/echartsAuthor/'+999999999);
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -413,14 +413,14 @@ export default {
       });
     },
     searchAuthHuaR:function(id){
-      this.$router.push('/admin/author/'+id);
+      this.$router.push('/author/'+id);
     },
     searchAffiHuaR:function(id){
-      this.$router.push('/admin/afflication/'+id);
+      this.$router.push('/afflication/'+id);
     },
     searchkKHua:function(id){
       console.log("in!!id:::",id);
-      this.$router.push('/admin/keyword/'+id);
+      this.$router.push('/keyword/'+id);
     },
     searchObj:function () {
        var objT=this.objType;
@@ -442,7 +442,7 @@ export default {
       _this.loading=true;
        if (objT==1) {
          this.searchAuthor=true;
-         this.$axios.get('http://47.101.165.107:3180/entity/searchAuthor', {
+         this.$axios.get('http://47.93.36.92:3180/entity/searchAuthor', {
            params: {
              authorName: objN
            },
@@ -453,7 +453,7 @@ export default {
        }
        else if (objT==2){
          this.searchAffili=true;
-         this.$axios.get('http://47.101.165.107:3180/entity/searchAffiliation',{
+         this.$axios.get('http://47.93.36.92:3180/entity/searchAffiliation',{
            params:{
              affiliationName:objN
            }
@@ -462,11 +462,11 @@ export default {
            _this.loading=false;
          })
        }else if (objT==3){
-         this.$router.push('/admin/conference/'+objN);
+         this.$router.push('/conference/'+objN);
        }
        else if (objT==4){
          this.searchKeyWs=true;
-         this.$axios.get('http://47.101.165.107:3180/entity/searchKeyword',{
+         this.$axios.get('http://47.93.36.92:3180/entity/searchKeyword',{
            params:{
              keyword:objN
            }
@@ -482,19 +482,19 @@ export default {
       console.log(row, event, column);
       var aId=row.authorId;
       console.log("aid:"+aId);
-      this.$router.push('/admin/author/'+aId);
+      this.$router.push('/author/'+aId);
     },
     searchAffiHua:function(row, event, column) {
       console.log(row, event, column);
       var affid=row.affiliationId;
       console.log("affid:"+affid);
-      this.$router.push('/admin/afflication/'+affid);
+      this.$router.push('/afflication/'+affid);
     },
     searchKHua:function(row, event, column) {
       console.log(row, event, column)
       var kid=row.keywordId;
       console.log("kid:"+kid);//获取成功
-      this.$router.push('/admin/keyword/'+kid);//TODO
+      this.$router.push('/keyword/'+kid);//TODO
     },
 
   },

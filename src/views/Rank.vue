@@ -205,7 +205,7 @@
     },
     mounted() {
       var _this = this;
-      this.$axios.get('http://47.101.165.107:3180/rank/topAuthor').then(function (response) {
+      this.$axios.get('http://47.93.36.92:3180/rank/topAuthor').then(function (response) {
        // console.log(response.data.data);
         _this.topAuthors=response.data.data;
         console.log("topauthores: "+_this.topAuthors);
@@ -214,7 +214,7 @@
         console.log("TopAuthor获取失败!!");
         console.log(error);
       });
-      this.$axios.get('http://47.101.165.107:3180/rank/aseTopAff').then(function (response) {
+      this.$axios.get('http://47.93.36.92:3180/rank/aseTopAff').then(function (response) {
         //console.log(response.data.data);
         _this.topAseAffis=response.data.data;
         console.log("aseTopAff获取成功！！！");
@@ -222,7 +222,7 @@
         console.log("aseTopAff获取失败!!");
         console.log(error);
       });
-      this.$axios.get('http://47.101.165.107:3180/rank/icseTopAff').then(function (response) {
+      this.$axios.get('http://47.93.36.92:3180/rank/icseTopAff').then(function (response) {
         //console.log(response.data.data);
         _this.topIcseAffis=response.data.data;
         console.log("icseTopAff获取成功！！！");
@@ -230,7 +230,7 @@
         console.log("icseTopAff获取失败!!");
         console.log(error);
       });
-      this.$axios.get('http://47.101.165.107:3180/rank/topKeyWords').then(function (response) {
+      this.$axios.get('http://47.93.36.92:3180/rank/topKeyWords').then(function (response) {
         console.log(response.data.data);
         _this.topKeywords=response.data.data;
         console.log(topKeywords);
@@ -239,7 +239,7 @@
         console.log("topKeyWords获取失败!!");
         console.log(error);
       });
-      this.$axios.get('http://47.101.165.107:3180/rank/topReference').then(function (response) {
+      this.$axios.get('http://47.93.36.92:3180/rank/topReference').then(function (response) {
         //console.log(response.data.data);
         _this.topRefs=response.data.data;
         console.log("topReference获取成功！！！");

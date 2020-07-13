@@ -1,9 +1,11 @@
 <template>
- 
+  
   <div class="content" style="background-color:#F7F8FA"> 
+    <div style="background:#8965E0;height:80px"></div>
+    <div style="height:20px"></div>
   <el-row :gutter="20" >
    <el-col :span="14" :offset="1">
-     <div class="grid-content bg-purple" style="height:300px">
+     <div class="grid-content " style="height:300px">
        <br>
        <br>
        <div style="margin-left:100px;margin-right:100px">
@@ -20,7 +22,7 @@
      </div>
     </el-col>
   <el-col :span="8">
-    <div class="grid-content bg-purple" style="height:300px">
+    <div class="grid-content" style="height:300px">
       <br>
       <br>
       <br>
@@ -41,19 +43,19 @@
   </el-row>
   <el-row :gutter="20">
     <el-col :span="11" :offset="1">
-      <div class="grid-content bg-purple" style="height:400px">
+      <div class="grid-content " style="height:400px">
         <div id="box" style="height:400px;width:100%"></div>
       </div>
     </el-col>
     <el-col :span="11" >
-      <div class="grid-content bg-purple" style="height:400px">
+      <div class="grid-content" style="height:400px">
         <div id="box2" style="height:400px;width:100%"></div>
       </div>
     </el-col>
   </el-row>
   <el-row :gutter="20">
     <el-col :span="11" :offset="1">
-      <div class="grid-content bg-purple" style="height:660px">
+      <div class="grid-content " style="height:660px">
         <div>
           <div style="height:20px"></div>
           <img :src="affrank" style="height:60px;width:60px;margin-left:15%;margin-top:0px">
@@ -87,7 +89,7 @@
       </div>
     </el-col>
     <el-col :span="11" >
-      <div class="grid-content bg-purple" style="height:660px">
+      <div class="grid-content" style="height:660px">
         <div>
           <div style="height:20px"></div>
           <img :src="affrank" style="height:60px;width:60px;margin-left:15%;margin-top:0px">
@@ -127,7 +129,7 @@
   </el-row>
   <el-row :gutter="20" v-for="(paper,index) in papers" :key="index">
     <el-col :span="18" :offset="3">
-      <div class="grid-content bg-purple" style="height:200px">
+      <div class="grid-content " style="height:222px">
         <div style="height:20px"></div>
         <div style="background-color:#2688BE;width:36px;height:36px;margin-left:20px;float:left;margin-right:10px"></div>
         <a style="display:inline;font-size:26px;width:100px;color:black" :href="paper.pdfLink">
@@ -196,23 +198,23 @@
     methods:{
        viewPublication:function(e){
          if(e.indexOf("ASE")!=-1){
-           this.$router.push('/admin/conference/ASE');
+           this.$router.push('/conference/ASE');
          }
          else{
-          this.$router.push('/admin/conference/ICSE');
+          this.$router.push('/conference/ICSE');
          }
       },
       viewAuthor(e){
-        this.$router.push('/admin/author/'+e);
+        this.$router.push('/author/'+e);
       },
       openDetails1(row){
-        this.$router.push('/admin/afflication/'+row.affiliationId);  
+        this.$router.push('/afflication/'+row.affiliationId);  
       },
       openDetails2(row){
-        this.$router.push('/admin/author/'+row.authorId);  
+        this.$router.push('/author/'+row.authorId);  
       },
       viewRelateAuthor:function(e){
-         this.$router.push('/admin/author/'+e);
+         this.$router.push('/author/'+e);
          location.reload();
       },
       drawchart(){
@@ -220,7 +222,7 @@
          let x=[];
          let y=[];
 
-        this.$axios.get('http://47.101.165.107:3180/chart/refPerYearBykeyword',{
+        this.$axios.get('http://47.93.36.92:3180/chart/refPerYearBykeyword',{
           params:{
                 keywordId:authorid
            }
@@ -291,7 +293,7 @@
          let x=[];
          let y=[];
 
-        this.$axios.get('http://47.101.165.107:3180/chart/articlePerYearByKeyword',{
+        this.$axios.get('http://47.93.36.92:3180/chart/articlePerYearByKeyword',{
           params:{
                 keywordId:authorid
            }
@@ -364,7 +366,7 @@
 
       let id=this.$route.params.id;
       console.log(id);
-      this.$axios.get('http://47.101.165.107:3180/entity/keywordPortrait',{
+      this.$axios.get('http://47.93.36.92:3180/entity/keywordPortrait',{
           params:{
                keywordId:id
            }
@@ -380,7 +382,7 @@
           console.log("获得作者画像失败！");
           console.log(error);
         });
-        this.$axios.get('http://47.101.165.107:3180/entity/articleListByKeyword',{
+        this.$axios.get('http://47.93.36.92:3180/entity/articleListByKeyword',{
           params:{
                keywordId:id
            }
@@ -399,7 +401,7 @@
           console.log("获得作者画像失败！");
           console.log(error);
         });
-         this.$axios.get('http://47.101.165.107:3180/rank/topAffiliationByKeyword',{
+         this.$axios.get('http://47.93.36.92:3180/rank/topAffiliationByKeyword',{
           params:{
                keywordId:id
            }
@@ -416,7 +418,7 @@
           console.log("获得作者画像失败！");
           console.log(error);
         });
-         this.$axios.get('http://47.101.165.107:3180/rank/topAuthorByKeyword',{
+         this.$axios.get('http://47.93.36.92:3180/rank/topAuthorByKeyword',{
           params:{
                keywordId:id
            }
@@ -466,6 +468,7 @@
     background: white;
   }
   .grid-content {
+    background: white;
     border-radius: 4px;
     min-height: 36px;
   }

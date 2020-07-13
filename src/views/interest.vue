@@ -3,8 +3,9 @@
   <!-- <el-row :gutter="20" >
    <el-col :span="24" > -->
     <div class="content">
+      <div style="background:#8965E0;height:90px"></div>
      <div style="height:50px"></div>
-     <div class="grid-content bg-purple" style="height:550px">
+     <div class="grid-content" style="height:550px">
        <div>
        <el-table
       :data="tableData"
@@ -81,7 +82,7 @@
      
       mounted(){
         var _this=this;
-        this.$axios.get('http://47.101.165.107:3180/rank/topKeywordAnalysis',{
+        this.$axios.get('http://47.93.36.92:3180/rank/topKeywordAnalysis',{
 
         }).then(function (response) {
           console.log(response.data.data);
@@ -94,7 +95,7 @@
       }, 
       methods:{
         opendetail(e){
-          this.$router.push('/admin/keyword/'+e); 
+          this.$router.push('/keyword/'+e); 
         }
       },
     }

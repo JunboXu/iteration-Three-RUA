@@ -136,7 +136,7 @@ export default {
         id=parseInt(id);
         console.log("tid:",id);
         //跳转到对应的author
-        _this.$router.push('/admin/author/'+id);
+        _this.$router.push('/author/'+id);
         location.reload();
       });
     },
@@ -153,7 +153,7 @@ export default {
         $.ajax({
           type: "get",
           async: false,
-          url: "http://47.101.165.107:3180/chart/linkedDataByAuthor",
+          url: "http://47.93.36.92:3180/chart/linkedDataByAuthor",
           data: {
             authorId: tid//TODO
           },
@@ -179,7 +179,7 @@ export default {
         $.ajax({
           type: "get",
           async: false,
-          url: "http://47.101.165.107:3180/chart/totalAuthorLinkedData",
+          url: "http://47.93.36.92:3180/chart/totalAuthorLinkedData",
           success: function (response) {
             console.log("responseNodes:", response);
             _this.relationNodes = response.data.nodes;

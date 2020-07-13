@@ -1,9 +1,11 @@
 <template>
  
   <div class="content" style="background-color:#F7F8FA"> 
+             <div style="background:#8965E0;height:80px"></div>
+    <div style="height:20px"></div>
   <el-row :gutter="20" >
    <el-col :span="22" :offset="1">
-     <div class="grid-content bg-purple" style="height:290px">
+     <div class="grid-content" style="height:290px">
        <div style="height:60px"></div>
        <div style="margin-left:60px;margin-right:100px;height:220px">
           <div style="float:right;width:450px">
@@ -54,17 +56,17 @@
   </el-row>
 <el-row :gutter="20">
     <el-col :span="7" :offset="1">
-      <div class="grid-content bg-purple" style="height:400px">
+      <div class="grid-content" style="height:400px">
         <div id="chart1" style="height:400px;width:100%"></div>
       </div>
     </el-col>
     <el-col :span="7">
-      <div class="grid-content bg-purple" style="height:400px">
+      <div class="grid-content" style="height:400px">
          <div id="chart2" style="height:400px;width:100%"></div>
       </div>
     </el-col>
     <el-col :span="8">
-      <div class="grid-content bg-purple" style="height:400px">
+      <div class="grid-content" style="height:400px">
         <div id="chart3" style="height:400px;width:100%"></div>
       </div>
     </el-col>
@@ -113,7 +115,7 @@
          let id=this.$route.params.id;
         console.log(id);
       var _this = this;
-      this.$axios.get('http://47.101.165.107:3180/entity/publicationPortrait',{
+      this.$axios.get('http://47.93.36.92:3180/entity/publicationPortrait',{
           params:{
                 publicationTitle:id
            }
@@ -141,7 +143,7 @@
          let x=[];
          let y=[];
        
-        this.$axios.get('http://47.101.165.107:3180/chart/hindexPerYearByPublication',{
+        this.$axios.get('http://47.93.36.92:3180/chart/hindexPerYearByPublication',{
           params:{
                 publicationTitle:id
            }
@@ -197,7 +199,7 @@
          let x=[];
          let y=[];
        
-        this.$axios.get('http://47.101.165.107:3180/chart/articlePerYearByPublication',{
+        this.$axios.get('http://47.93.36.92:3180/chart/articlePerYearByPublication',{
           params:{
                 publicationTitle:id
            }
@@ -253,7 +255,7 @@
          let x=[];
          let y=[];
        
-        this.$axios.get('http://47.101.165.107:3180/chart/referencePerYearByPublication',{
+        this.$axios.get('http://47.93.36.92:3180/chart/referencePerYearByPublication',{
           params:{
                 publicationTitle:id
            }
@@ -334,6 +336,7 @@
     background: white;
   }
   .grid-content {
+        background: white;
     border-radius: 4px;
     min-height: 36px;
   }

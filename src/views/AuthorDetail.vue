@@ -1,9 +1,11 @@
 <template>
- 
+
   <div class="content" style="background-color:#F7F8FA"> 
+           <div style="background:#8965E0;height:90px"></div>
+     <div style="height:50px"></div>
   <el-row :gutter="20" >
    <el-col :span="14" :offset="1">
-     <div class="grid-content bg-purple" style="height:380px">
+     <div class="grid-content" style="height:380px">
        <div style="height:60px"></div>
        <div style="margin-left:50px;margin-right:100px;height:220px">
          <img :src="authoricon" style="float:left;heigth:120px;width:120px;margin-top:40px">
@@ -44,7 +46,7 @@
      </div>
     </el-col>
   <el-col :span="8">
-    <div class="grid-content bg-purple" style="height:380px" id="box12">
+    <div class="grid-content" style="height:380px" id="box12">
        <div style="margin-left:30px;">
          <div style="height:20px"></div>
        <div style="font-size:20px;margin-left:10px">Author Map</div>
@@ -64,31 +66,31 @@
 <!--    </el-row>-->
   <el-row :gutter="20">
     <el-col :span="22" :offset="1">
-      <div class="grid-content bg-purple" style="height:400px">
+      <div class="grid-content" style="height:400px">
         <div id="box" style="height:400px;width:100%"></div>
       </div>
     </el-col>
   </el-row>
-  <el-row :gutter="20" >
+  <!-- <el-row :gutter="20" >
     <el-col :offset="1" :span="22"> 
-      <div class="grid-content bg-purple" style="height:200px">
+      <div class="grid-content" style="height:200px">
         <p style="font-size:26px;margin-left:20px;">related authors</p>
         <el-col :span="8" >
-          <div class="grid-content bg-purple" style="cursor: pointer;height:135px" @click="viewRelateAuthor(relatedAuthor[0].authorId)">
+          <div class="grid-content" style="cursor: pointer;height:135px" @click="viewRelateAuthor(relatedAuthor[0].authorId)">
             <img :src="authoricon" style="float:left;heigth:120px;width:120px;margin-top:5px;float:left">
             <div style="height:50px"></div>
             <div style="font-size:20px">{{relatedAuthor[0].authorName}}</div>
           </div>
         </el-col>
         <el-col :span="8"  >
-          <div class="grid-content bg-purple" style="cursor: pointer;height:135px" @click="viewRelateAuthor(relatedAuthor[1].authorId)">
+          <div class="grid-content" style="cursor: pointer;height:135px" @click="viewRelateAuthor(relatedAuthor[1].authorId)">
             <img :src="authoricon" style="float:left;heigth:120px;width:120px;margin-top:5px" >
             <div style="height:50px"></div>
             <div style="font-size:20px">{{relatedAuthor[1].authorName}}</div>
           </div>
         </el-col>
         <el-col :span="8"  >
-          <div class="grid-content bg-purple" style="cursor: pointer;height:135px" @click="viewRelateAuthor(relatedAuthor[2].authorId)">
+          <div class="grid-content" style="cursor: pointer;height:135px" @click="viewRelateAuthor(relatedAuthor[2].authorId)">
             <img :src="authoricon" style="float:left;heigth:120px;width:120px;margin-top:5px" >
             <div style="height:50px"></div>
             <div style="font-size:20px">{{relatedAuthor[2].authorName}}</div>
@@ -96,7 +98,7 @@
           </el-col>
       </div>
     </el-col>
-  </el-row>
+  </el-row> -->
   <el-row :gutter="20">
     <el-col :offset="3">
       <div style="font-size:26px;color:grey">papers</div>
@@ -104,7 +106,7 @@
   </el-row>
   <el-row :gutter="20" v-for="(paper,index) in papers" :key="index">
     <el-col :span="18" :offset="3">
-      <div class="grid-content bg-purple" style="height:200px">
+      <div class="grid-content" style="height:250px">
         <div style="height:20px"></div>
         <div style="background-color:#2688BE;width:36px;height:36px;margin-left:20px;float:left;margin-right:10px"></div>
         <a style="display:inline;font-size:26px;width:100px;color:black" :href="paper.pdfLink">
@@ -183,35 +185,35 @@
     },
     methods:{
       viewRelateAuthor:function(e){
-         this.$router.push('/admin/author/'+e);
+         this.$router.push('/author/'+e);
          location.reload();
       },
       getAuthorMap(){
         let authorid=this.$route.params.id;
-        this.$router.push('/admin/echartsAuthor/'+authorid);
+        this.$router.push('/echartsAuthor/'+authorid);
       },
        viewPublication:function(e){
          if(e.indexOf("ASE")!=-1){
-           this.$router.push('/admin/conference/ASE');
+           this.$router.push('/conference/ASE');
          }
          else{
-          this.$router.push('/admin/conference/ICSE');
+          this.$router.push('/conference/ICSE');
          }
       },
       viewAuthor(e){
-        this.$router.push('/admin/author/'+e); location.reload();
+        this.$router.push('/author/'+e); location.reload();
       },
       viewAuthorAff(e){
         var _this=this;
         console.log(e);
-        this.$axios.get('http://47.101.165.107:3180/utils/getAffiliationIdByName',{
+        this.$axios.get('http://47.93.36.92:3180/utils/getAffiliationIdByName',{
           params:{
             affiliationName:e
           }
         }).then(function(response){
           console.log("sdf"+response.data.data);
           let temo=response.data.data;
-          _this.$router.push('/admin/afflication/'+temo);
+          _this.$router.push('/afflication/'+temo);
         }).catch(function(error){
 
         });
@@ -221,18 +223,19 @@
         let authorid=this.$route.params.id;
          let x=[];
          let y=[];
-
-        this.$axios.get('http://47.101.165.107:3180/chart/referencePerYearByAuthor',{
+        // console.log(authorid);
+        this.$axios.get('http://47.93.36.92:3180/chart/referencePerYearByAuthor',{
           params:{
                 authorId:authorid
            }
         }).then(function (response) {
           console.log(response.data.data);
-          var mychart3=echarts.init(document.getElementById("box"));
-          x=response.data.data.yearList;
+                    x=response.data.data.yearList;
           console.log(x);
           y=response.data.data.referenceList;
           console.log("成功获得引用！");
+          var mychart3=echarts.init(document.getElementById("box"));
+
           let option = {
                         title: {
                             text: "citation amount statics"
@@ -388,7 +391,7 @@
        */
       dataEChart(){
         var _this=this;
-        this.$axios.get('http://47.101.165.107:3180/chart/linkedDataByAuthor',{
+        this.$axios.get('http://47.93.36.92:3180/chart/linkedDataByAuthor',{
           params:{
             authorId:this.$route.params.id
           }
@@ -410,7 +413,7 @@
       linkEChart(){
         var links=[];
         var _this=this;
-        this.$axios.get('http://47.101.165.107:3180/chart/linkedDataByAuthor',{
+        this.$axios.get('http://47.93.36.92:3180/chart/linkedDataByAuthor',{
           params:{
             authorId:this.$route.params.id
           }
@@ -435,7 +438,8 @@
 
        var _this = this;
       let id=this.$route.params.id;
-      this.$axios.get('http://47.101.165.107:3180/entity/authorPortrait',{
+      console.log(id);
+      this.$axios.get('http://47.93.36.92:3180/entity/authorPortrait',{
           params:{
                authorId:id
            }
@@ -464,7 +468,7 @@
           console.log(error);
         });
 
-        this.$axios.get('http://47.101.165.107:3180/entity/articleListByAuthor',{
+        this.$axios.get('http://47.93.36.92:3180/entity/articleListByAuthor',{
           params:{
                authorId:id
            }
@@ -482,33 +486,33 @@
           console.log("获得相关作者失败！");
           console.log(error);
         });
-        this.$axios.get('http://47.101.165.107:3180/entity/relatedAuthors',{
-          params:{
-               authorId:id
-           }
+        // this.$axios.get('http://47.93.36.92:3180/entity/relatedAuthors',{
+        //   params:{
+        //        authorId:id
+        //    }
       
-        }).then(function (response) {
-          console.log(response.data.data);
-          _this.relatedAuthor=response.data.data;
+        // }).then(function (response) {
+        //   console.log(response.data.data);
+        //   _this.relatedAuthor=response.data.data;
 
-        }).catch(function (error) {
-          console.log("获得相关作者失败！");
-          console.log(error);
-        });
+        // }).catch(function (error) {
+        //   console.log("获得相关作者失败！");
+        //   console.log(error);
+        // });
 
-        this.$axios.get('http://47.101.165.107:3180/entity/relatedAuthors',{
-          params:{
-               authorId:id
-           }
+        // this.$axios.get('http://47.93.36.92:3180/entity/relatedAuthors',{
+        //   params:{
+        //        authorId:id
+        //    }
       
-        }).then(function (response) {
-          console.log(response.data.data);
-          _this.relatedAuthor=response.data.data
-        }).catch(function (error) {
-          console.log("获得相关作者失败！");
-          console.log(error);
-        });
-         this.$axios.get('http://47.101.165.107:3180/chart/referencePerYearByAuthor',{
+        // }).then(function (response) {
+        //   console.log(response.data.data);
+        //   _this.relatedAuthor=response.data.data
+        // }).catch(function (error) {
+        //   console.log("获得相关作者失败！");
+        //   console.log(error);
+        // });
+         this.$axios.get('http://47.93.36.92:3180/chart/referencePerYearByAuthor',{
           params:{
                authorId:id
            }
@@ -551,6 +555,7 @@
     background: white;
   }
   .grid-content {
+        background: white;
     border-radius: 4px;
     min-height: 36px;
   }

@@ -1,9 +1,11 @@
 <template>
- 
+
   <div class="content" style="background-color:#F7F8FA"> 
+         <div style="background:#8965E0;height:80px"></div>
+    <div style="height:20px"></div>
   <el-row :gutter="20" >
    <el-col :span="14" :offset="1">
-     <div class="grid-content bg-purple" style="height:300px">
+     <div class="grid-content" style="height:300px">
        <br>
        <br>
        <div style="margin-left:100px;margin-right:100px">
@@ -18,7 +20,7 @@
      </div>
     </el-col>
   <el-col :span="8">
-    <div class="grid-content bg-purple" style="height:300px">
+    <div class="grid-content" style="height:300px">
       <br>
       <br>
       <div style="margin-left:80px">
@@ -45,24 +47,24 @@
   </el-row>
   <el-row :gutter="20">
     <el-col :span="7" :offset="1">
-      <div class="grid-content bg-purple" style="height:400px">
+      <div class="grid-content" style="height:400px">
         <div id="chart1" style="height:400px;width:100%"></div>
       </div>
     </el-col>
     <el-col :span="7">
-      <div class="grid-content bg-purple" style="height:400px">
+      <div class="grid-content" style="height:400px">
          <div id="chart2" style="height:400px;width:100%"></div>
       </div>
     </el-col>
     <el-col :span="8">
-      <div class="grid-content bg-purple" style="height:400px">
+      <div class="grid-content" style="height:400px">
        <div id="chart3" style="height:400px;width:100%"></div>
       </div>
     </el-col>
   </el-row>
   <el-row :gutter="20">
     <el-col :span="6" :offset="1">
-      <div class="grid-content bg-purple" style="height:100px">
+      <div class="grid-content" style="height:100px">
         <br>
         <img :src="authoricon" style="width:60px;height:60px;margin-left:40px">
         <div style="font-size:20px;margin-left:20px;display:inline">Follower List</div>
@@ -133,7 +135,7 @@
     mounted(){
       let id=this.$route.params.id;
       var _this=this;
-       this.$axios.get('http://47.101.165.107:3180/entity/affiliationPortrait',{
+       this.$axios.get('http://47.93.36.92:3180/entity/affiliationPortrait',{
           params:{
                affiliationId:id
            }
@@ -149,7 +151,7 @@
           console.log("获得机构画像失败！");
           console.log(error);
         });
-         this.$axios.get('http://47.101.165.107:3180/entity/getSubAuthorsByAffiliation',{
+         this.$axios.get('http://47.93.36.92:3180/entity/getSubAuthorsByAffiliation',{
           params:{
                affiliationId:id
            }
@@ -169,14 +171,14 @@
     methods:{
       openDetails (row) {
         console.log(row);
-        this.$router.push('/admin/author/'+row.authorId);      
+        this.$router.push('/author/'+row.authorId);      
     },
     drawchart1(){
         let id=this.$route.params.id;
          let x=[];
          let y=[];
        
-        this.$axios.get('http://47.101.165.107:3180/chart/hindexPerYearByAffiliation',{
+        this.$axios.get('http://47.93.36.92:3180/chart/hindexPerYearByAffiliation',{
           params:{
                 affiliationId:id
            }
@@ -232,7 +234,7 @@
          let x=[];
          let y=[];
        
-        this.$axios.get('http://47.101.165.107:3180/chart/articlePerYearByAffiliation',{
+        this.$axios.get('http://47.93.36.92:3180/chart/articlePerYearByAffiliation',{
           params:{
                 affiliationId:id
            }
@@ -291,7 +293,7 @@
          let x=[];
          let y=[];
        
-        this.$axios.get('http://47.101.165.107:3180/chart/keywordDistribution',{
+        this.$axios.get('http://47.93.36.92:3180/chart/keywordDistribution',{
           params:{
                 affiliationId:id
            }
@@ -363,6 +365,7 @@
     background: white;
   }
   .grid-content {
+        background: white;
     border-radius: 4px;
     min-height: 36px;
   }

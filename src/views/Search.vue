@@ -1,7 +1,8 @@
 <template>
-  <div class="content" :style="note" style="height:100%">
+  <div class="content" :style="note" >
    
-    <div v-if="ok" class="container-fluid" style="margin-left:50px;margin-top:100px;">
+    <div v-if="ok" class="container-fluid" style="margin-left:50px;">
+      <div style="height:200px"></div>
       <div class="row" style="height:150px;font-size:80px;margin-left:24%;color:white">OASIS SEARCH</div>
       <div class="row" style="height: 50px;margin-left: 80px">
         <div class="col-md-2">
@@ -77,6 +78,7 @@
     <div v-if="no" v-loading="loa"     element-loading-text="LOADING..."
     element-loading-spinner="el-icon-loading"
     element-loading-background="rgba(0, 0, 0, 0.8)">
+          <div style="background:#8965E0;height:80px"></div>
       <h3 v-if="notfind" style="margin-left:270px;">Sorry your search does not return any result...
       </h3>
       <card>
@@ -227,7 +229,7 @@
             return;
           }
         }
-        this.$axios.post('http://47.101.165.107:3180/search/item',{
+        this.$axios.post('http://47.93.36.92:3180/search/item',{
           author:vauthor,
           affiliation:vaffliction,
           publication:vpublication,
@@ -250,42 +252,42 @@
         })
       }
     },
+    // .news-item
+//   background-color #fff
+//   padding 20px 30px 20px 80px
+//   border-bottom 1px solid #0e0e0e
+//   margin 0 auto
+//   width 80%
+//   position relative
+//   line-height 20px
+//   .score
+//     color #ff6600
+//     font-size 1.1em
+//     font-weight 700
+//     position absolute
+//     top 50%
+//     left 0
+//     width 80px
+//     text-align center
+//     margin-top -10px
+//   .meta, .host
+//     font-size .85em
+//     color #828282
+//     a
+//       color #828282
+//       text-decoration underline
+//       &:hover
+//         color #ff6600
   }
 
 </script>
-<style lang="stylus">
+<style>
 .placeholder{
-  color #0e0e0e;
+  color: #0e0e0e;
 }
   .text-wrapper {
     word-break: break-all;
     word-wrap: break-word
   }
-.news-item
-  background-color #fff
-  padding 20px 30px 20px 80px
-  border-bottom 1px solid #0e0e0e
-  margin 0 auto
-  width 80%
-  position relative
-  line-height 20px
-  .score
-    color #ff6600
-    font-size 1.1em
-    font-weight 700
-    position absolute
-    top 50%
-    left 0
-    width 80px
-    text-align center
-    margin-top -10px
-  .meta, .host
-    font-size .85em
-    color #828282
-    a
-      color #828282
-      text-decoration underline
-      &:hover
-        color #ff6600
 </style>
 
