@@ -1,6 +1,6 @@
 <template>
-  <div class="content" :style="note" >
-   
+  <div class="content" :style="note"  style="height:750px">
+
     <div v-if="ok" class="container-fluid" style="margin-left:50px;">
       <div style="height:200px"></div>
       <div class="row" style="height:150px;font-size:80px;margin-left:24%;color:white">OASIS SEARCH</div>
@@ -114,145 +114,144 @@
     </li>
       </card>
     </div>
-    
-    
+
   </div>
 </template>
 <script>
-  import axios from 'axios'
-  import router from 'vue-router'
-  import Card from '@/components/Cards/Card.vue'
-  export default {
-    components: {
+import axios from 'axios'
+import router from 'vue-router'
+import Card from '@/components/Cards/Card.vue'
+export default {
+  components: {
 
-    },
-    data() {
-      return {
-        papers:[],
-        input1: '',
-        input2: '',
-        input3: '',
-        input4: '',
-        select1: '',
-        select2: '',
-        select3: '',
-        select4: '',
-        yearFrom:'',
-        yearTo:'',
-        ok:true,
-        no:false,
-        listIsNull:false,
-        loa:true,
-        notfind:false,
-        find:true,
-        note:{
-           backgroundImage: "url(" + require("@/assets/img/fin.png") + ") ",
-           backgroundPosition: "center center",
-           backgroundRepeat: "no-repeat",
-           backgroundSize: "cover"
-        }
+  },
+  data () {
+    return {
+      papers: [],
+      input1: '',
+      input2: '',
+      input3: '',
+      input4: '',
+      select1: '',
+      select2: '',
+      select3: '',
+      select4: '',
+      yearFrom: '',
+      yearTo: '',
+      ok: true,
+      no: false,
+      listIsNull: false,
+      loa: true,
+      notfind: false,
+      find: true,
+      note: {
+        backgroundImage: 'url(' + require('@/assets/img/fin.png') + ') ',
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        
       }
-   },
-    methods:{
-      show(){},
-      hide(){},
-      created(){
-　　　　 //如果没有这句代码，select中初始化会是空白的，默认选中就无法实现
-        this.select1 = "作者";
-      },
-      search:function(){
-        var vauthor="";
-        var vpublication="";
-        var vaffliction="";
-        var vkeyWords="";
-        var vyears="";
-        var _this=this;
-        var isValid=true;
+    }
+  },
+  methods: {
+    show () {},
+    hide () {},
+    created () {
+      // 如果没有这句代码，select中初始化会是空白的，默认选中就无法实现
+      this.select1 = '作者'
+    },
+    search: function () {
+      var vauthor = ''
+      var vpublication = ''
+      var vaffliction = ''
+      var vkeyWords = ''
+      var vyears = ''
+      var _this = this
+      var isValid = true
 
-        vauthor=this.input1;
-        vpublication=this.input2;
-        vaffliction=this.input3;
-        vkeyWords=this.input4;
+      vauthor = this.input1
+      vpublication = this.input2
+      vaffliction = this.input3
+      vkeyWords = this.input4
 
-        if (this.yearFrom==""){
-          this.yearFrom="0";
-        }
-        if (this.yearTo==""){
-          this.yearTo="0"
-        }
-        vyears=this.yearFrom+"-"+this.yearTo;
-        if (vauthor==""){
-          vauthor="null";
-        }
-        if (vpublication==""){
-          vpublication="null";
-        }
-        if (vaffliction==""){
-          vaffliction="null";
-        }
-        if (vkeyWords==""){
-          vkeyWords="null";
-        }
-        if(vyears=="-"){
-          vyears="0-0";
-        }
-        console.log("vaut:"+vauthor);
-        console.log("vaff:"+vaffliction);
-        console.log("vpublic:"+vpublication);
-        console.log("vk:"+vkeyWords);
-        console.log("vy:"+vyears);
+      if (this.yearFrom == '') {
+        this.yearFrom = '0'
+      }
+      if (this.yearTo == '') {
+        this.yearTo = '0'
+      }
+      vyears = this.yearFrom + '-' + this.yearTo
+      if (vauthor == '') {
+        vauthor = 'null'
+      }
+      if (vpublication == '') {
+        vpublication = 'null'
+      }
+      if (vaffliction == '') {
+        vaffliction = 'null'
+      }
+      if (vkeyWords == '') {
+        vkeyWords = 'null'
+      }
+      if (vyears == '-') {
+        vyears = '0-0'
+      }
+      console.log('vaut:' + vauthor)
+      console.log('vaff:' + vaffliction)
+      console.log('vpublic:' + vpublication)
+      console.log('vk:' + vkeyWords)
+      console.log('vy:' + vyears)
 
-        //对会议进行验证
-        if ((vpublication!="ASE")&&(vpublication!="ICSE")&&(vpublication!="null")){
-          isValid=false;
+      // 对会议进行验证
+      if ((vpublication != 'ASE') && (vpublication != 'ICSE') && (vpublication != 'null')) {
+        isValid = false
+        this.$notify({
+          title: 'input error',
+          message: 'Only hav ASE / ICSE publication',
+          duration: 0
+        })
+        return
+      } else {
+        if ((!isNaN(this.yearFrom)) && (!isNaN(this.yearTo))) {
+          // 对于空数组和只有一个数值成员的数组或全是数字组成的字符串，isNaN返回false，例如：'123'、[]、[2]、['123'],isNaN返回false,
+          // 所以如果不需要val包含这些特殊情况，则这个判断改写为if(!isNaN(val) && typeof val === 'number' )
+          isValid = true
+          this.ok = false
+          this.no = true
+        } else {
+          isValid = false
           this.$notify({
             title: 'input error',
-            message: 'Only hav ASE / ICSE publication',
+            message: 'please input the valid time format! eg:2019',
             duration: 0
-          });
-          return;
-        }else {
-          if((!isNaN(this.yearFrom))&&(!isNaN(this.yearTo))){
-            //对于空数组和只有一个数值成员的数组或全是数字组成的字符串，isNaN返回false，例如：'123'、[]、[2]、['123'],isNaN返回false,
-            //所以如果不需要val包含这些特殊情况，则这个判断改写为if(!isNaN(val) && typeof val === 'number' )
-            isValid=true;
-            this.ok=false;
-            this.no=true;
-          }
-          else{
-             isValid=false;
-             this.$notify({
-              title: 'input error',
-              message: 'please input the valid time format! eg:2019',
-              duration: 0
-            });
-            return;
-          }
+          })
+          return
         }
-        this.$axios.post('http://47.93.36.92:3180/search/item',{
-          author:vauthor,
-          affiliation:vaffliction,
-          publication:vpublication,
-          keyWords:vkeyWords,
-          time:vyears
-        }).then(function (response) {
-            _this.papers=response.data.data;
-
-            console.log("成功获得papers列表！")
-            console.log(_this.papers);
-            _this.loa=false;
-            console.log(_this.papers.length);
-            if (_this.papers.length==0){
-              _this.notfind=true;
-        _this.find=false;
-            }
-        }).catch(function (error) {
-          console.log("获得papers列表失败！");
-          console.log(error);
-        })
       }
-    },
-    // .news-item
+      this.$axios.post('http://47.93.36.92:3180/search/item', {
+        author: vauthor,
+        affiliation: vaffliction,
+        publication: vpublication,
+        keyWords: vkeyWords,
+        time: vyears
+      }).then(function (response) {
+        _this.papers = response.data.data
+
+        console.log('成功获得papers列表！')
+        console.log(_this.papers)
+        _this.loa = false
+        console.log(_this.papers.length)
+        if (_this.papers.length == 0) {
+          _this.notfind = true
+          _this.find = false
+        }
+      }).catch(function (error) {
+        console.log('获得papers列表失败！')
+        console.log(error)
+      })
+    }
+  }
+  // .news-item
 //   background-color #fff
 //   padding 20px 30px 20px 80px
 //   border-bottom 1px solid #0e0e0e
@@ -278,7 +277,7 @@
 //       text-decoration underline
 //       &:hover
 //         color #ff6600
-  }
+}
 
 </script>
 <style>
@@ -290,4 +289,3 @@
     word-wrap: break-word
   }
 </style>
-
