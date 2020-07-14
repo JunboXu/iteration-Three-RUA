@@ -323,77 +323,75 @@ export default {
   name: 'SearchObj',
   filters: {
     ellipsis (value) {
-      if (!value) return '';
+      if (!value) return ''
       if (value.length > 10) {
-        return value.slice(0,10) + '..';
+        return value.slice(0, 10) + '..'
       }
-      return value;
+      return value
     }
   },
-
-  data(){
-    return{
-      find:true,
-      sear:false,
-      searchAuthor:false,
-      searchAffili:false,
-      searchKeyWs:false,
-      loading:false,
-      objType:"",
-      objName:"",
-      topAuthorsA:[],
-      topaffiliationA:[],
-      topKeywordsA:[],
-      toprefs:[],
-      authors:[],
-      affis:[],
-      keyws:[],
-      note:{
-        backgroundImage: "url(" + require("@/assets/img/fin.png") + ") ",
-        backgroundPosition: "center center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover"
+  data () {
+    return {
+      find: true,
+      sear: false,
+      searchAuthor: false,
+      searchAffili: false,
+      searchKeyWs: false,
+      loading: false,
+      objType: '',
+      objName: '',
+      topAuthorsA: [],
+      topaffiliationA: [],
+      topKeywordsA: [],
+      toprefs: [],
+      authors: [],
+      affis: [],
+      keyws: [],
+      note: {
+        backgroundImage: 'url(' + require('@/assets/img/fin.png') + ') ',
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
       },
-      note1:{
-        backgroundImage: "url(" + require("@/assets/img/halfPic.jpg") + ") ",
-        backgroundPosition: "center center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover"
+      note1: {
+        backgroundImage: 'url(' + require('@/assets/img/halfPic.jpg') + ') ',
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
       }
     }
   },
-  mounted() {
-    var _this = this;
-    this.$axios.get('http://47.93.36.92:3180/rank/topKeywordByActivation').then(function (response){
-
+  mounted () {
+    var _this = this
+    this.$axios.get('http://47.93.36.92:3180/rank/topKeywordByActivation').then(function (response) {
       // console.log(response.data.data);//这一步可执行
-      _this.topKeywordsA=response.data.data;//这一步报错说undefined
-      console.log("getKeywordByActivation成功！");
-      console.log(_this.topKeywordsA);
-    });
-    this.$axios.get('http://47.93.36.92:3180/rank/topAffiliationByActivation').then(function (response){
-      _this.topaffiliationA=response.data.data;
+      _this.topKeywordsA = response.data.data// 这一步报错说undefined
+      console.log('getKeywordByActivation成功！')
+      console.log(_this.topKeywordsA)
+    })
+    this.$axios.get('http://47.93.36.92:3180/rank/topAffiliationByActivation').then(function (response) {
+      _this.topaffiliationA = response.data.data
       // console.log("gettopaffiliationA成功！");
       // console.log(_this.topaffiliationA);
-    });
-    this.$axios.get('http://47.93.36.92:3180/rank/topAuthorByActivation').then(function (response){
-      _this.topAuthorsA=response.data.data;
+    })
+    this.$axios.get('http://47.93.36.92:3180/rank/topAuthorByActivation').then(function (response) {
+      _this.topAuthorsA = response.data.data
       // console.log("topAuthorsA成功！");
       // console.log(_this.topAuthorsA);
-    });
-    this.$axios.get('http://47.93.36.92:3180/rank/topReference').then(function (response){
-      _this.toprefs=response.data.data;
+    })
+    this.$axios.get('http://47.93.36.92:3180/rank/topReference').then(function (response) {
+      _this.toprefs = response.data.data
       // console.log("toprefs成功！");
       // console.log(_this.toprefs);
-    });
+    })
   },
-  methods:{
-    goToInterest:function(){
-      this.$router.push('/interest');
+  methods: {
+    goToInterest: function () {
+      this.$router.push('/interest')
     },
-    seeRelationGraph:function(){
-      //TODO
-      //跳转到显示全局关系图的页面
+    seeRelationGraph: function () {
+      // TODO
+      // 跳转到显示全局关系图的页面
       this.$confirm('此操作将耗费较长时间, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -402,102 +400,98 @@ export default {
         this.$message({
           type: 'success',
           message: '正在继续!'
-        });
-        this.$router.push('/echartsAuthor/'+999999999);
+        })
+        this.$router.push('/echartsAuthor/' + 999999999)
       }).catch(() => {
         this.$message({
           type: 'info',
           message: '已取消'
-        });
-        return;
-      });
+        })
+      })
     },
-    searchAuthHuaR:function(id){
-      this.$router.push('/author/'+id);
+    searchAuthHuaR: function (id) {
+      this.$router.push('/author/' + id)
     },
-    searchAffiHuaR:function(id){
-      this.$router.push('/afflication/'+id);
+    searchAffiHuaR: function (id) {
+      this.$router.push('/afflication/' + id)
     },
-    searchkKHua:function(id){
-      console.log("in!!id:::",id);
-      this.$router.push('/keyword/'+id);
+    searchkKHua: function (id) {
+      console.log('in!!id:::', id)
+      this.$router.push('/keyword/' + id)
     },
-    searchObj:function () {
-       var objT=this.objType;
-       var objN=this.objName;
-       var _this=this;
-       if (this.objType==""){
-           this.$alert('请选择你要搜索的实体类别', '操作错误', {
-             confirmButtonText: '确定',
-             callback: action => {
-               this.$message({
-                 type: 'info',
-                 message: `action: ${ action }`
-               });
-             }
-           });
-           return;
-       }
-      _this.sear=true;
-      _this.loading=true;
-       if (objT==1) {
-         this.searchAuthor=true;
-         this.$axios.get('http://47.93.36.92:3180/entity/searchAuthor', {
-           params: {
-             authorName: objN
-           },
-         }).then(function (response) {
-           _this.authors = response.data.data;
-           _this.loading=false;
-         })
-       }
-       else if (objT==2){
-         this.searchAffili=true;
-         this.$axios.get('http://47.93.36.92:3180/entity/searchAffiliation',{
-           params:{
-             affiliationName:objN
-           }
-         }).then(function (response) {
-           _this.affis = response.data.data;
-           _this.loading=false;
-         })
-       }else if (objT==3){
-         this.$router.push('/conference/'+objN);
-       }
-       else if (objT==4){
-         this.searchKeyWs=true;
-         this.$axios.get('http://47.93.36.92:3180/entity/searchKeyword',{
-           params:{
-             keyword:objN
-           }
-         }).then(function (response) {
-           _this.keyws = response.data.data;
-           _this.loading=false;
-         })
+    searchObj: function () {
+      var objT = this.objType
+      var objN = this.objName
+      var _this = this
+      if (this.objType == '') {
+        this.$alert('请选择你要搜索的实体类别', '操作错误', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `action: ${action}`
+            })
+          }
+        })
+        return
       }
-
+      _this.sear = true
+      _this.loading = true
+      if (objT == 1) {
+        this.searchAuthor = true
+        this.$axios.get('http://47.93.36.92:3180/entity/searchAuthor', {
+          params: {
+            authorName: objN
+          }
+        }).then(function (response) {
+          _this.authors = response.data.data
+          _this.loading = false
+        })
+      } else if (objT == 2) {
+        this.searchAffili = true
+        this.$axios.get('http://47.93.36.92:3180/entity/searchAffiliation', {
+          params: {
+            affiliationName: objN
+          }
+        }).then(function (response) {
+          _this.affis = response.data.data
+          _this.loading = false
+        })
+      } else if (objT == 3) {
+        this.$router.push('/conference/' + objN)
+      } else if (objT == 4) {
+        this.searchKeyWs = true
+        this.$axios.get('http://47.93.36.92:3180/entity/searchKeyword', {
+          params: {
+            keyword: objN
+          }
+        }).then(function (response) {
+          _this.keyws = response.data.data
+          _this.loading = false
+        })
+      }
     },
-    searchAuthorHua:function (row, event, column) {
-      console.log("alreadyin");
-      console.log(row, event, column);
-      var aId=row.authorId;
-      console.log("aid:"+aId);
-      this.$router.push('/author/'+aId);
-    },
-    searchAffiHua:function(row, event, column) {
-      console.log(row, event, column);
-      var affid=row.affiliationId;
-      console.log("affid:"+affid);
-      this.$router.push('/afflication/'+affid);
-    },
-    searchKHua:function(row, event, column) {
+    searchAuthorHua: function (row, event, column) {
+      console.log('alreadyin')
       console.log(row, event, column)
-      var kid=row.keywordId;
-      console.log("kid:"+kid);//获取成功
-      this.$router.push('/keyword/'+kid);//TODO
+      var aId = row.authorId
+      console.log('aid:' + aId)
+      this.$router.push('/author/' + aId)
     },
+    searchAffiHua: function (row, event, column) {
+      console.log(row, event, column)
+      var affid = row.affiliationId
+      console.log('affid:' + affid)
+      this.$router.push('/afflication/' + affid)
+    },
+    searchKHua: function (row, event, column) {
+      console.log(row, event, column)
+      var kid = row.keywordId
+      console.log('kid:' + kid)// 获取成功
+      this.$router.push('/keyword/' + kid)// TODO
+    }
 
-  },
+  }
 
 }
 </script>
@@ -519,9 +513,10 @@ export default {
     transition-timing-function:ease-in-out;
   }
   .entranceSet{
-    height: 500px;
+    height: 800px;
     /*background-color: #2688BE;*/
     margin-top: 40px;
+    margin-bottom: 20px;
 
   }
   .entrance{
@@ -533,6 +528,7 @@ export default {
     align-items: center;
     margin-left: 100px;
     margin-right: 40px;
+    margin-bottom: 190px;
   }
   .entrancepic{
     width: 350px;
