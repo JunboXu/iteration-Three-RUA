@@ -57,7 +57,8 @@
                     <router-link to="/register" class="dropdown-item">Register</router-link>
                     <router-link to="/about" class="dropdown-item">About</router-link>
                     <router-link to="/searchPaper" class="dropdown-item">paper search</router-link>
-                    
+                    <router-link v-if="isManager" to="/uploadCSV" class="dropdown-item">uploadCSV</router-link>
+
 
                 </base-dropdown>
             </ul>
@@ -113,6 +114,11 @@ export default {
     BaseNav,
     CloseButton,
     BaseDropdown
+  },
+  data() { 
+      return {
+        isManager : true 
+      }
   }
 };
 </script>
