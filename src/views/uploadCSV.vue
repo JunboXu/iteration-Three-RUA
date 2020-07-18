@@ -61,14 +61,15 @@ export default {
   methods: {
     uploadModelFile: function () {
       if ($('#uploadCSV input').val() === '') {
-        return
+        alert("请选择要上传的文件")
+        return;
       }
       let options = {
         clearForm: true,
         url: 'http://47.93.36.92:3180/upload/csvFile',
         success: function (res) {
           console.log(res)
-          alert('上传成功！')
+          alert(res.status.msg)
         },
         error: function (err) {
           console.log(err)
