@@ -15,7 +15,8 @@ import conference from './views/CoferenceDetail.vue';
 import keyword from './views/keywordDetail.vue';
 import searchObj from './views/SearchObj.vue';
 import interest from './views/interest.vue';
-import uploadCSV from './views/uploadCSV'
+import uploadCSV from './views/uploadCSV.vue';
+import collect from './views/collect.vue';
 
 Vue.use(Router);
 
@@ -150,6 +151,15 @@ export default new Router({
       components: {
         header: AppHeader,
         default:uploadCSV,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/collect",
+      name: "collect",
+      components: {
+        header: AppHeader,
+        default:collect,
         footer: AppFooter
       }
     },

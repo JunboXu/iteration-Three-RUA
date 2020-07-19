@@ -58,7 +58,7 @@
                     <router-link to="/about" class="dropdown-item">About</router-link>
                     <router-link to="/searchPaper" class="dropdown-item">paper search</router-link>
                     <router-link v-if="isManager" to="/uploadCSV" class="dropdown-item">uploadCSV</router-link>
-
+                    <router-link to="/collect" class="dropdown-item">collection</router-link>
 
                 </base-dropdown>
             </ul>
