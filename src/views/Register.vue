@@ -95,6 +95,7 @@ export default {
         }
     },
     methods:{
+        //表单验证没有做
         register: function(){
             var _this= this;
             this.$axios.post('http://47.93.36.92:3180/user/register', {
