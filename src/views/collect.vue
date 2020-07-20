@@ -104,15 +104,15 @@ export default {
   margin: 0;
 }
 .body {
-  width: 600px;
-  height: 560px;
+  width: 100%;
+  height: 100%;
   /* background-color: skyblue; */
   /* border: 1px solid rgba(0, 0, 0, 2); */
   margin: 10px auto;
   perspective: 300px;
 }
 .body > div {
-  width: 240px;
+  width: 40%;
   height: 260px;
   /* background-color: pink; */
   /* box-shadow: 2px 2px rgba(0, 0, 0, .2) ; */
@@ -124,7 +124,7 @@ export default {
 }
 .typeimg {
   height: 150px;
-  width: 220px;
+  width: 90%;
   margin-left: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -140,6 +140,6 @@ h {
 }
 .body > div:hover{
   cursor: pointer;
-  transform: translateZ(20px);
+  transform: translateZ(10px);
 }
 </style>
