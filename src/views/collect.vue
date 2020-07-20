@@ -109,6 +109,7 @@ export default {
   /* background-color: skyblue; */
   /* border: 1px solid rgba(0, 0, 0, 2); */
   margin: 10px auto;
+  perspective: 300px;
 }
 .body > div {
   width: 240px;
@@ -119,6 +120,7 @@ export default {
   float: left;
   /* text-align: center; */
   margin: 15px 10px 0px 40px;
+  transition: all 0.3s;
 }
 .typeimg {
   height: 150px;
@@ -138,5 +140,6 @@ h {
 }
 .body > div:hover{
   cursor: pointer;
+  transform: translateZ(20px);
 }
 </style>
