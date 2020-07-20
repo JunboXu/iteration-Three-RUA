@@ -37,6 +37,43 @@
               <div class="row justify-content-center">
                 <div class="col-lg-9 uparea">
                   <p>这是您的收藏夹</p>
+                  <div class="body">
+                    <div>
+                      <div class="typeimg">
+
+                      </div>
+                      <div class="des">
+                        <h4>机构</h4>
+                        <p>收藏夹</p>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="typeimg">
+                      </div>
+                      <div class="des">
+                        <h4>研究方向</h4>
+                        <p>收藏夹</p>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="typeimg">
+
+                      </div>
+                      <div class="des">
+                        <h4>会议</h4>
+                        <p>收藏夹</p>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="typeimg author">
+
+                      </div>
+                      <div class="des">
+                        <h4>作者</h4>
+                        <p>收藏夹</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -62,5 +99,44 @@ export default {
 }
 </script>
 <style>
-
+* {
+  padding: 0;
+  margin: 0;
+}
+.body {
+  width: 600px;
+  height: 560px;
+  /* background-color: skyblue; */
+  /* border: 1px solid rgba(0, 0, 0, 2); */
+  margin: 10px auto;
+}
+.body > div {
+  width: 240px;
+  height: 260px;
+  /* background-color: pink; */
+  /* box-shadow: 2px 2px rgba(0, 0, 0, .2) ; */
+  border: 1px solid rgba(0 , 0 , 0, .1);
+  float: left;
+  /* text-align: center; */
+  margin: 15px 10px 0px 40px;
+}
+.typeimg {
+  height: 150px;
+  width: 220px;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(0 , 0 , 0, .1);
+  text-align: center;
+}
+h {
+  margin-top: 75px;
+}
+.des {
+  text-align: left;
+  text-indent: 1.5em;
+}
+.body > div:hover{
+  cursor: pointer;
+}
 </style>
