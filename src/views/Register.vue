@@ -106,10 +106,13 @@ export default {
             }).then(function (response) {
                 console.log("已发送: username"+_this.userName+_this.email+" pas: "+_this.pswd+" profession: "+_this.profession);
                 console.log(response);
-                //TODO 设置名字缓存，并跳转到首页
+                alert("注册成功！请跳转到登陆");
+                //TODO 设置名字缓存，并跳转到登陆
+                _this.$router.push({name: 'login'});
             }).catch(function (error) {
-                console.log('注册失败！')
-                console.log(error)
+                alert('注册失败！请按要求注册');
+                console.log(error);
+                // _this.$router.push('login');
             })
         }
     }
